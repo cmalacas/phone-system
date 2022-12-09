@@ -124,4 +124,25 @@ class CompanyController extends Controller
         return response()->json(['response' => $response], 200, [], JSON_NUMERIC_CHECK);
 
     }
+
+    public function script(Request $request) {
+
+        $phone = $request->get('phone');
+
+        $company = DB::table('companies')
+                    ->select(
+                            'companies.*',
+                            DB::raw('(SELECT GROUP_CONCAT(CONCAT(firstname, " ", lastname) SEPARATOR ", ") FROM contacts WHERE company_id = companies.id LIMIT 1) AS names')
+                        )
+                    ->whereRaw("REPLACE(phone_number, ' ', '') = '$phone'")
+                    ->first();
+
+    
+        $data['company'] = $company;
+
+        return response()->json($data, 200, [], JSON_NUMERIC_CHECK);
+
+
+    }
+    
 }

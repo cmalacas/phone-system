@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/company/{id}/script', function() {
+    return view('layouts.app');
+});
+
+Route::post('/companies/script', 'CompanyController@script');
+
 Auth::routes();
 
 Route::group(['middleware' => 'auth:web'], function() {

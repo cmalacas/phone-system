@@ -26,13 +26,13 @@ export default class App extends Component {
                 <Routes>
                         <Route path="/" exact element={<Companies />} />
                         <Route path="/dashboard" exact element={<Companies />} />
-                        <Route path="/{id}/script" exact element={<Script />} />
+                        <Route path="/company/:id/script" exact element={<Script />} />
                         <Route path="/register" exact element={<Register />} />
                         <Route path="/login" exact element={<Login />} />
                         <Route path="/companies" exact element={<Companies />} />
                         <Route path="/scripts" exact element={<Scripts />} />
                         <Route path="/greetings" exact element={<Greetings />} />
-                        <Route path="/responses" exact element={<Responses />} />
+                        <Route path="/responses" exact element={<Responses />} />                        
                 </Routes>
             </Router>
         )
