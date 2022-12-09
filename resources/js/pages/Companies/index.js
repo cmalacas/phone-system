@@ -150,6 +150,14 @@ export default class Companies extends Component {
 
         const data = companies.map( c => {
 
+            const phone_number = c.phone_number.replace(/\s/g, '');
+
+            const direct = c.direct.replace(/\s/g, '');
+
+            c._phone_number = <a href={`/company/${phone_number}/script`} target="_blank">{c.phone_number}</a>
+
+            c._direct = <a href={`/company/${direct}/script`} target="_blank">{c.direct}</a>
+
             c.actions = <Fragment>
 
                 <Edit
@@ -183,11 +191,11 @@ export default class Companies extends Component {
                     text: 'Company Name'
                 },
                 {
-                    dataField: 'phone_number',
+                    dataField: '_phone_number',
                     text: 'Phone Number'
                 },
                 {
-                    dataField: 'direct',
+                    dataField: '_direct',
                     text: 'Direct Dialing'
                 },
                 {

@@ -134,7 +134,7 @@ class CompanyController extends Controller
                             'companies.*',
                             DB::raw('(SELECT GROUP_CONCAT(CONCAT(firstname, " ", lastname) SEPARATOR ", ") FROM contacts WHERE company_id = companies.id LIMIT 1) AS names')
                         )
-                    ->whereRaw("REPLACE(phone_number, ' ', '') = '$phone'")
+                    ->whereRaw("(REPLACE(phone_number, ' ', '') = '$phone' OR REPLACE(direct, ' ', '') = '$phone')")
                     ->first();
 
     
