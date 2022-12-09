@@ -12,6 +12,7 @@ import { formatter, format_datetime, format_date } from '../../components/Functi
 import Authservice from '../../components/Authservice';
 
 import ReactTooltip from "react-tooltip";
+import Greetings from '../Greetings';
 
 
 export default class Scripts extends Component {
@@ -38,6 +39,50 @@ export default class Scripts extends Component {
         this.close = this.close.bind(this);
         this.change = this.change.bind(this);
         this.save = this.save.bind(this);
+        this.selectGreeting = this.selectGreeting.bind(this);
+        this.selectResponse = this.selectResponse.bind(this);
+
+    }
+
+    selectResponse(e) {
+
+        const response_id = parseInt(e.target.value);
+
+        const company_id = this.state.id;
+
+        const data = { response_id, company_id }
+
+        Authservice.post('/companies/responses', data)
+        .then(response => {
+
+            if (response.response) {
+
+                this.setState({response: response.response});
+
+            }
+
+        })
+
+    }
+
+    selectGreeting(e) {
+
+        const greeting_id = parseInt(e.target.value);
+
+        const company_id = this.state.id;
+
+        const data = { greeting_id, company_id }
+
+        Authservice.post('/companies/greetings', data)
+        .then(response => {
+
+            if (response.greeting) {
+
+                this.setState({greeting: response.greeting});
+
+            }
+
+        })
 
     }
 
@@ -105,6 +150,10 @@ export default class Scripts extends Component {
 
         const company = this.props.company;
 
+        const greetings = this.props.greetings;
+
+        const responses = this.props.responses;
+
         return (
 
             <Fragment>
@@ -139,6 +188,16 @@ export default class Scripts extends Component {
                                 Greeting
                             </Col>
                             <Col>
+                                <Input onChange={this.selectGreeting} type="select" className="form-control mb-2">
+                                    <option value="">select</option>
+                                    {
+                                        greetings.map( g => {
+
+                                            return <option value={g.id}>{g.name}</option>
+
+                                        })
+                                    }
+                                </Input>
                                 <Input type="textarea" 
                                     name="greeting"
                                     rows={3}
@@ -159,6 +218,16 @@ export default class Scripts extends Component {
                                 Response
                             </Col>
                             <Col>
+                                <Input onChange={this.selectResponse} type="select" className="form-control mb-2">
+                                    <option value="">select</option>
+                                    {
+                                        responses.map( r => {
+
+                                            return <option value={r.id}>{r.name}</option>
+
+                                        })
+                                    }
+                                </Input>
                                 <Input type="textarea" 
                                     name="response"
                                     rows={3}

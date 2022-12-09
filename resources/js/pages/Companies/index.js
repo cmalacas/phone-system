@@ -28,6 +28,8 @@ export default class Companies extends Component {
 
             companies: [],
             keywords: '',
+            greetings: [],
+            responses: []
 
         }
 
@@ -73,7 +75,11 @@ export default class Companies extends Component {
 
             if (response.companies) {
 
-                this.setState({ companies: response.companies });
+                this.setState({ 
+                    companies: response.companies,
+                    greetings: response.greetings,
+                    responses: response.responses
+                });
 
                 ReactTooltip.rebuild();
 
@@ -157,6 +163,8 @@ export default class Companies extends Component {
 
                 <Scripts 
                     company={c}
+                    greetings={this.state.greetings}
+                    responses={this.state.responses}
                 />
 
                 

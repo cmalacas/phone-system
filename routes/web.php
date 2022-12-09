@@ -42,6 +42,8 @@ Route::group(['middleware' => 'auth:web'], function() {
         Route::post('/update', 'CompanyController@update');
         Route::post('/delete', 'CompanyController@delete');     
         Route::post('/save-scripts', 'CompanyController@saveScripts');
+        Route::post('/greetings', 'CompanyController@greetings');     
+        Route::post('/responses', 'CompanyController@responses');     
 
     });
 
@@ -51,6 +53,7 @@ Route::group(['middleware' => 'auth:web'], function() {
         Route::post('/save', 'ContactController@save');   
         Route::post('/update', 'ContactController@update');
         Route::post('/delete', 'ContactController@delete');     
+        
 
     });
 

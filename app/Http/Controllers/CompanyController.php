@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Company;
+use App\Greeting;
+use App\Response;
 
 use DB;
 
@@ -21,8 +23,13 @@ class CompanyController extends Controller
                         ->where('deleted', '=', 0)
                         ->get();
 
+        $data = [
+                    'companies' => $companies,
+                    'greetings' => Greeting::orderBy('name')->get(),
+                    'responses' => Response::orderBy('name')->get()
+                ];
 
-        return response()->json(['companies' => $companies], 200, [], JSON_NUMERIC_CHECK);
+        return response()->json($data, 200, [], JSON_NUMERIC_CHECK);
 
     }
 
@@ -83,6 +90,38 @@ class CompanyController extends Controller
         $company->save();
 
         return response()->json(['success' => 1], 200, [], JSON_NUMERIC_CHECK);
+
+    }
+
+    public function greetings(Request $request) {
+
+        $company = Company::find($request->get('company_id'));
+
+        $g = Greeting::find($request->get('greeting_id'));
+
+        $str = ['[company]'];
+
+        $values = [$company->name];
+
+        $greeting = str_replace($str, $values, $g->greeting);
+
+        return response()->json(['greeting' => $greeting], 200, [], JSON_NUMERIC_CHECK);
+
+    }
+
+    public function responses(Request $request) {
+
+        $company = Company::find($request->get('company_id'));
+
+        $res = Response::find($request->get('response_id'));
+
+        $str = ['[company]'];
+
+        $values = [$company->name];
+
+        $response = str_replace($str, $values, $res->response);
+
+        return response()->json(['response' => $response], 200, [], JSON_NUMERIC_CHECK);
 
     }
 }
