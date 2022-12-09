@@ -74,8 +74,10 @@ Route::group(['middleware' => 'auth:web'], function() {
             return view('layouts.app');
         });
 
-        Route::post('/save', 'DashboardController@save');
-        Route::get('/{id}/success', 'DashboardController@success');
+        Route::post('/get', 'ResponseController@get');
+        Route::post('/save', 'ResponseController@save');
+        Route::post('/update', 'ResponseController@update');
+        Route::post('/delete', 'ResponseController@delete');
 
     });
 

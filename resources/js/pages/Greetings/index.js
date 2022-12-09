@@ -99,7 +99,8 @@ export default class Greetings extends Component {
     const columns = [
                 {
                   dataField: 'name',
-                  text: 'Name'
+                  text: 'Name',
+                  classes: 'text-nowrap'
                 },
                 {
                   dataField: 'greeting',
@@ -107,7 +108,8 @@ export default class Greetings extends Component {
                 },
                 {
                   dataField: 'actions',
-                  text: 'Actions'
+                  text: 'Actions',
+                  classes: 'text-nowrap'
                 }
               ];
 
