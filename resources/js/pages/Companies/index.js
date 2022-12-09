@@ -13,6 +13,8 @@ import Authservice from '../../components/Authservice';
 
 import ReactTooltip from "react-tooltip";
 
+import paginationFactory from 'react-bootstrap-table2-paginator';
+
 import Contacts from './Contacts';
 import Scripts from './Scripts';
 
@@ -25,6 +27,7 @@ export default class Companies extends Component {
         this.state = {
 
             companies: [],
+            keywords: '',
 
         }
 
@@ -34,6 +37,13 @@ export default class Companies extends Component {
         this.getData = this.getData.bind(this);
         this.update = this.update.bind(this);
         this.delete = this.delete.bind(this);
+        this.search = this.search.bind(this);
+
+    }
+
+    search(e) {
+
+        this.setState({keywords: e.target.value});
 
     }
 
@@ -118,7 +128,21 @@ export default class Companies extends Component {
 
     render() {
 
-        const data = this.state.companies.map( c => {
+        const companies = this.state.companies.filter( c => {
+
+            const str = `${c.name}${c.phone_number}${c.direct}`.toString().toUpperCase();
+
+            const keywords = this.state.keywords.toString().toUpperCase();
+
+            if (keywords === '' || str.indexOf(keywords) >= 0 ) {
+
+                return c;
+
+            }
+
+        });
+
+        const data = companies.map( c => {
 
             c.actions = <Fragment>
 
@@ -163,7 +187,13 @@ export default class Companies extends Component {
                     text: 'Actions'
                 }
 
-            ]
+            ];
+
+        const pageOptions = {
+            showTotal: false,
+            sizePerPage: 15,
+            hideSizePerPage: true
+        }
 
         return (
 
@@ -172,10 +202,13 @@ export default class Companies extends Component {
                 <div className="container">
 
                     <Row className="mb-3">
-                        <Col>
+                        <Col md={8}>
                             <h5>COMPANIES</h5>
                         </Col>
-                        <Col className="text-right">
+                        <Col className="text-right d-flex">
+
+                            <Input type="search" placeholder="Search" onChange={this.search} />
+
                             <Add
                                 save={this.save} 
                             />
@@ -191,6 +224,7 @@ export default class Companies extends Component {
                                 columns={columns}
                                 striped={true}
                                 hover={true}
+                                pagination={ paginationFactory( pageOptions ) }
                             />
                         </Col>
                     </Row>
@@ -342,7 +376,7 @@ class Add extends Component {
         return (
 
             <Fragment>
-                <Button onClick={this.open} color="primary"><FontAwesomeIcon icon={faPlus} /> Add Company</Button>
+                <Button onClick={this.open} color="primary" className="text-nowrap ml-1"><FontAwesomeIcon icon={faPlus} /> Add Company</Button>
                 <Modal isOpen={this.state.open} toggle={this.close}>
                     <ModalHeader>
                         Add Company

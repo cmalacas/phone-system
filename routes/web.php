@@ -54,4 +54,29 @@ Route::group(['middleware' => 'auth:web'], function() {
 
     });
 
+
+    Route::prefix('/greetings')->group(function() {
+
+        Route::get('/', function () {
+            return view('layouts.app');
+        });
+
+        Route::post('/get', 'GreetingController@get');
+        Route::post('/save', 'GreetingController@save');
+        Route::post('/update', 'GreetingController@update');
+        Route::post('/delete', 'GreetingController@delete');     
+        
+    });
+
+    Route::prefix('/responses')->group(function() {
+
+        Route::get('/', function () {
+            return view('layouts.app');
+        });
+
+        Route::post('/save', 'DashboardController@save');
+        Route::get('/{id}/success', 'DashboardController@success');
+
+    });
+
 });

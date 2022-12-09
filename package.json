@@ -29,6 +29,7 @@
         "@fortawesome/free-solid-svg-icons": "^6.2.1",
         "@fortawesome/react-fontawesome": "^0.2.0",
         "react-bootstrap-table-next": "^4.0.3",
+        "react-bootstrap-table2-paginator": "^2.1.2",
         "react-router-dom": "^6.4.5",
         "react-tooltip": "^4.2.20",
         "reactstrap": "^9.1.5",
