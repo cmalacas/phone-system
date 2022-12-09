@@ -41,6 +41,7 @@ Route::group(['middleware' => 'auth:web'], function() {
         Route::post('/get', 'CompanyController@get');   
         Route::post('/update', 'CompanyController@update');
         Route::post('/delete', 'CompanyController@delete');     
+        Route::post('/save-scripts', 'CompanyController@saveScripts');
 
     });
 

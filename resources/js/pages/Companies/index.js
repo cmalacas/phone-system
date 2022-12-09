@@ -395,20 +395,20 @@ class Add extends Component {
                             </Col>
                         </FormGroup> */ }
 
-                        {/* <FormGroup>
+                         <FormGroup>
                             <Label>
                                 Email Address:
                             </Label>
-                            <Input type="text" name="email" value={this.state.email} onChange={this.change} />
-                            { this.state.errorEmail ?
-                                <span className="invalid-feedback d-block" role="alert">
-                                    <strong>this is required</strong>
-                                </span>
-
-                            : '' }
+                            <Input 
+                                type="text" 
+                                name="email" 
+                                value={this.state.email}
+                                onChange={this.change}
+                            />
+                            
                         </FormGroup>
 
-                            */ }
+                        
 
                         <FormGroup>
                             <Label>
@@ -473,7 +473,7 @@ class Edit extends Component {
             contact_person_firstname: '',
             contact_person_lastname: '',
             business_activity: company.business_activity,
-            email: '',
+            email: company.email,
             phone_number: company.phone_number,
             direct: company.direct,
             open: false,
@@ -599,6 +599,19 @@ class Edit extends Component {
                                 </span>
 
                             : '' }
+                        </FormGroup>
+
+                        <FormGroup>
+                            <Label>
+                                Email Address:
+                            </Label>
+                            <Input 
+                                type="text" 
+                                name="email" 
+                                value={this.state.email}
+                                onChange={this.change}
+                            />
+                            
                         </FormGroup>
 
                         

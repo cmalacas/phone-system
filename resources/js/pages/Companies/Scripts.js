@@ -20,9 +20,17 @@ export default class Scripts extends Component {
 
         super(props);
 
+        const company = props.company;
+
         this.state = {
 
             open: false,
+
+            id: company.id,
+            greeting: company.greeting,
+            response: company.response,
+            call_answering: company.call_answering,
+            voicemail: company.voicemail
 
         }
 
@@ -46,13 +54,49 @@ export default class Scripts extends Component {
     change(e) {
 
         this.setState({
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
+            errorGreeting: false,
+            errorResponse: false
         });
 
     }
 
     save() {
 
+        let valid = true;
+        let errorGreeting = false;
+        let errorResponse = false;
+
+        const { greeting, response, call_answering, voicemail, id } = this.state;
+
+        if (!greeting) {
+
+            valid = false;
+            errorGreeting = true;
+
+        }
+
+        if (!response) {
+
+            valid = false;
+            errorResponse = true;
+
+        }
+
+        if (valid) {
+
+            const data = { id, greeting, response, call_answering, voicemail };
+
+            Authservice.post('/companies/save-scripts', data);
+
+        } else {
+
+            this.setState({
+                errorGreeting,
+                errorResponse
+            });
+
+        }
 
 
     }
@@ -100,7 +144,13 @@ export default class Scripts extends Component {
                                     rows={3}
                                     value={this.state.greeting}
                                     onChange={this.change}
+                                    className={ this.state.errorGreeting ? 'is-invalid' : '' }
                                 />
+                                { this.state.errorGreeting ?
+                                    <span className="invalid-feedback" role="alert">
+                                        <strong>This is required</strong>
+                                    </span>
+                                : '' }
                             </Col>
                         </FormGroup>
 
@@ -114,16 +164,31 @@ export default class Scripts extends Component {
                                     rows={3}
                                     value={this.state.response}
                                     onChange={this.change}
+                                    className={ this.state.errorResponse ? 'is-invalid' : ''}
                                 />
+                                { this.state.errorResponse ?
+                                    <span className="invalid-feedback" role="alert">
+                                        <strong>This is required</strong>
+                                    </span>
+                                : '' }
                             </Col>
                         </FormGroup>
 
-                        <Row className="mb-2">
+                        <Row className="mb-4">
                             <Col md={2} className="font-weight-bold">
                                 Names:
                             </Col>
                             <Col>
+                                {company.names}
+                            </Col>
+                        </Row>
 
+                        <Row className="mb-4">
+                            <Col md={2} className="font-weight-bold">
+                                Business Activity:
+                            </Col>
+                            <Col>
+                                {company.business_activity}
                             </Col>
                         </Row>
 
@@ -133,10 +198,10 @@ export default class Scripts extends Component {
                             </Col>
                             <Col>
                                 <Label className="mr-4 pr-2">
-                                    <Input className="position-relative ml-0" type="checkbox" /> Call Answering
+                                    <Input checked={this.state.call_answering === 1} onChange={() => this.setState({ call_answering: this.state.call_answering === 0 ? 1 : 0})} className="position-relative ml-0" type="checkbox" /> Call Answering
                                 </Label>
                                 <Label>
-                                    <Input className="position-relative ml-0" type="checkbox" /> Voicemail
+                                    <Input checked={this.state.voicemail === 1} onChange={() => this.setState({ voicemail: this.state.voicemail === 0 ? 1 : 0})} className="position-relative ml-0" type="checkbox" /> Voicemail
                                 </Label>
                             </Col>
                         </Row>
