@@ -393,104 +393,79 @@ class Add extends Component {
 
             <Fragment>
                 <Button onClick={this.open} color="primary" className="text-nowrap ml-1"><FontAwesomeIcon icon={faPlus} /> Add Company</Button>
-                <Modal isOpen={this.state.open} toggle={this.close}>
+                <Modal isOpen={this.state.open} toggle={this.close} className="mw-100 w-75">
                     <ModalHeader>
                         Add Company
                     </ModalHeader>
                     <ModalBody>
 
-                        <FormGroup>
-                            <Label>
-                                Company Name:
-                            </Label>
-                            <Input 
-                                type="text" 
-                                name="name" 
-                                value={this.state.name} 
-                                onChange={this.change} 
-                            />
-                            { this.state.errorName ?
-                                <span className="invalid-feedback d-block" role="alert">
-                                    <strong>this is required</strong>
-                                </span>
-
-                            : '' }
-                        </FormGroup>
-
-                        {/* <FormGroup row>
-                            <Col>
+                        <FormGroup row>
+                            <Col md={6}>
                                 <Label>
-                                    Contact First Name:
+                                    Company Name:
                                 </Label>
-                                <Input type="text" name="contact_person_firstname" value={this.state.contact_person_firstname} onChange={this.change} />
-                                { this.state.errorContactFirstname ?
+                                <Input 
+                                    type="text" 
+                                    name="name" 
+                                    value={this.state.name} 
+                                    onChange={this.change} 
+                                />
+                                { this.state.errorName ?
                                     <span className="invalid-feedback d-block" role="alert">
                                         <strong>this is required</strong>
                                     </span>
 
                                 : '' }
                             </Col>
-
-                            <Col>
+                            <Col md={6}>
                                 <Label>
-                                    Contact Last Name:
+                                    Email Address:
                                 </Label>
-                                <Input type="text" name="contact_person_lastname" value={this.state.contact_person_lastname} onChange={this.change} />
-                                { this.state.errorContactLastname ?
-                                    <span className="invalid-feedback d-block" role="alert">
-                                        <strong>this is required</strong>
-                                    </span>
-
-                                : '' }
+                                <Input 
+                                    type="text" 
+                                    name="email" 
+                                    value={this.state.email}
+                                    onChange={this.change}
+                                />
                             </Col>
-                        </FormGroup> */ }
-
-                         <FormGroup>
-                            <Label>
-                                Email Address:
-                            </Label>
-                            <Input 
-                                type="text" 
-                                name="email" 
-                                value={this.state.email}
-                                onChange={this.change}
-                            />
-                            
                         </FormGroup>
 
                         
 
-                        <FormGroup>
-                            <Label>
-                                Phone Number:
-                            </Label>
-                            <Input type="text" name="phone_number" value={this.state.phone_number} onChange={this.change} />
-                            { this.state.errorPhone ?
-                                <span className="invalid-feedback d-block" role="alert">
-                                    <strong>this is required</strong>
-                                </span>
+                        <FormGroup row>
+                            <Col md={6}>
+                                <Label>
+                                    Phone Number:
+                                </Label>
+                                <Input type="text" name="phone_number" value={this.state.phone_number} onChange={this.change} />
+                                { this.state.errorPhone ?
+                                    <span className="invalid-feedback d-block" role="alert">
+                                        <strong>this is required</strong>
+                                    </span>
 
-                            : '' }
-                        </FormGroup>
+                                : '' }
+                            </Col>
 
-                        <FormGroup>
-                            <Label>
-                                Direct Dialing:
-                            </Label>
-                            <Input type="text" name="direct" value={this.state.direct} onChange={this.change} />
-                            { this.state.errorDirect ?
-                                <span className="invalid-feedback d-block" role="alert">
-                                    <strong>this is required</strong>
-                                </span>
+                            <Col md={6}>
+                                <Label>
+                                    Direct Dialing:
+                                </Label>
+                                <Input type="text" name="direct" value={this.state.direct} onChange={this.change} />
+                                { this.state.errorDirect ?
+                                    <span className="invalid-feedback d-block" role="alert">
+                                        <strong>this is required</strong>
+                                    </span>
 
-                            : '' }
+                                : '' }
+                            </Col>
+                            
                         </FormGroup>
 
                         <FormGroup>
                             <Label>
                                 Business Activity:
                             </Label>
-                            <Input type="textarea" rows={10} name="business_activity" value={this.state.business_activity} onChange={this.change} />
+                            <Input type="textarea" rows={20} name="business_activity" value={this.state.business_activity} onChange={this.change} />
                         </FormGroup>
 
                     </ModalBody>
@@ -539,9 +514,11 @@ class Edit extends Component {
         this.close = this.close.bind(this);
         this.save = this.save.bind(this);
         this.change = this.change.bind(this);
+       
 
     }
 
+   
     open() {
 
         this.setState({ open: true });
@@ -627,75 +604,77 @@ class Edit extends Component {
 
             <Fragment>
                 <Button onClick={this.open} color="info" data-tip="Edit" className="mr-1"><FontAwesomeIcon icon={faEdit} /> </Button>
-                <Modal isOpen={this.state.open} toggle={this.close}>
+                <Modal isOpen={this.state.open} toggle={this.close} className="mw-100 w-75">
                     <ModalHeader>
                         Edit Company
                     </ModalHeader>
                     <ModalBody>
 
-                        <FormGroup>
-                            <Label>
-                                Company Name:
-                            </Label>
-                            <Input 
-                                type="text" 
-                                name="name" 
-                                value={this.state.name} 
-                                onChange={this.change} 
-                            />
-                            { this.state.errorName ?
-                                <span className="invalid-feedback d-block" role="alert">
-                                    <strong>this is required</strong>
-                                </span>
+                        <FormGroup row>
+                            <Col md={6}>
+                                <Label>
+                                    Company Name:
+                                </Label>
+                                <Input 
+                                    type="text" 
+                                    name="name" 
+                                    value={this.state.name} 
+                                    onChange={this.change} 
+                                />
+                                { this.state.errorName ?
+                                    <span className="invalid-feedback d-block" role="alert">
+                                        <strong>this is required</strong>
+                                    </span>
 
-                            : '' }
-                        </FormGroup>
-
-                        <FormGroup>
-                            <Label>
-                                Email Address:
-                            </Label>
-                            <Input 
-                                type="text" 
-                                name="email" 
-                                value={this.state.email}
-                                onChange={this.change}
-                            />
-                            
-                        </FormGroup>
+                                : '' }
+                            </Col>
+                            <Col md={6}>
+                                <Label>
+                                    Email Address:
+                                </Label>
+                                <Input 
+                                    type="text" 
+                                    name="email" 
+                                    value={this.state.email}
+                                    onChange={this.change}
+                                />
+                            </Col>
+                        </FormGroup>                       
 
                         
-                        <FormGroup>
-                            <Label>
-                                Phone Number:
-                            </Label>
-                            <Input type="text" name="phone_number" value={this.state.phone_number} onChange={this.change} />
-                            { this.state.errorPhone ?
-                                <span className="invalid-feedback d-block" role="alert">
-                                    <strong>this is required</strong>
-                                </span>
+                        <FormGroup row>
+                            <Col md={6}>
+                                <Label>
+                                    Phone Number:
+                                </Label>
+                                <Input type="text" name="phone_number" value={this.state.phone_number} onChange={this.change} />
+                                { this.state.errorPhone ?
+                                    <span className="invalid-feedback d-block" role="alert">
+                                        <strong>this is required</strong>
+                                    </span>
 
-                            : '' }
-                        </FormGroup>
+                                : '' }
+                            </Col>
+                            <Col md={6}>
+                                <Label>
+                                    Direct Dialing:
+                                </Label>
+                                <Input type="text" name="direct" value={this.state.direct} onChange={this.change} />
+                                { this.state.errorDirect ?
+                                    <span className="invalid-feedback d-block" role="alert">
+                                        <strong>this is required</strong>
+                                    </span>
 
-                        <FormGroup>
-                            <Label>
-                                Direct Dialing:
-                            </Label>
-                            <Input type="text" name="direct" value={this.state.direct} onChange={this.change} />
-                            { this.state.errorDirect ?
-                                <span className="invalid-feedback d-block" role="alert">
-                                    <strong>this is required</strong>
-                                </span>
-
-                            : '' }
-                        </FormGroup>
+                                : '' }
+                            </Col>
+                        </FormGroup>                       
 
                         <FormGroup>
                             <Label>
                                 Business Activity:
                             </Label>
-                            <Input type="textarea" rows={10} name="business_activity" value={this.state.business_activity} onChange={this.change} />
+                            <Input type="textarea" rows={20} name="business_activity" value={this.state.business_activity} onChange={this.change} />                             
+                            
                         </FormGroup>
 
                     </ModalBody>

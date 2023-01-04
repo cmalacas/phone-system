@@ -108,8 +108,18 @@ export default class Script extends Component {
                                 <Col md={2}>
                                     Business Activity:
                                 </Col>
-                                <Col style={{ lineHeight: 2 }}>
-                                    {this.state.business_activity}
+                                <Col>
+                                    {
+                                        this.state.business_activity ?
+
+                                            this.state.business_activity.split("\n").map( b => {
+
+                                                return <p>{b}</p>
+
+                                            })
+
+                                        : '' 
+                                    }
                                 </Col>
                             </Row>
 
