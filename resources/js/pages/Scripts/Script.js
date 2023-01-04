@@ -108,7 +108,7 @@ export default class Script extends Component {
                                 <Col md={2}>
                                     Business Activity:
                                 </Col>
-                                <Col>
+                                <Col style={{ lineHeight: 2 }}>
                                     {this.state.business_activity}
                                 </Col>
                             </Row>
