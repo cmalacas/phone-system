@@ -15,6 +15,8 @@ import ReactTooltip from "react-tooltip";
 
 import paginationFactory from 'react-bootstrap-table2-paginator';
 
+import Dropzone from 'react-dropzone';
+
 import Contacts from './Contacts';
 import Scripts from './Scripts';
 
@@ -286,8 +288,11 @@ class Add extends Component {
         this.close = this.close.bind(this);
         this.save = this.save.bind(this);
         this.change = this.change.bind(this);
+        
 
     }
+
+    
 
     open() {
 
@@ -468,6 +473,8 @@ class Add extends Component {
                             <Input type="textarea" rows={20} name="business_activity" value={this.state.business_activity} onChange={this.change} />
                         </FormGroup>
 
+                        
+
                     </ModalBody>
                     <ModalFooter>
                         <Button onClick={this.close} color="danger"><FontAwesomeIcon icon={faBan} /> Cancel</Button>
@@ -500,6 +507,8 @@ class Edit extends Component {
             business_activity: company.business_activity,
             email: company.email,
             phone_number: company.phone_number,
+            vm_path: company.vm_path,
+            greeting_path: company.greeting_path,
             direct: company.direct,
             open: false,
             errorName: false,
@@ -515,6 +524,40 @@ class Edit extends Component {
         this.save = this.save.bind(this);
         this.change = this.change.bind(this);
        
+        this.drop = this.drop.bind(this);
+    }
+
+    drop(files, section) {
+
+        const data = new FormData();
+
+        files.forEach((file, index) => {
+            data.append(`file`, file, file.name);
+        });
+
+        data.append('company_id', this.state.id);
+        data.append('section', section);
+
+        this.setState( { uploading: true } );
+
+        Authservice.post('/companies/upload', data)
+        .then( response => {
+
+            if (response.path) {
+
+                if (section === 'vm') {
+
+                    this.setState( { vm_path: response.path } );
+
+                } else if (section === 'greeting') {
+
+                    this.setState( { greeting_path: response.path } );
+
+                }
+
+            }
+
+        })
 
     }
 
@@ -541,7 +584,7 @@ class Edit extends Component {
         let errorPhone = false;
         let errorDirect = false;
 
-        const {id, name, contact_person_firstname, contact_person_lastname, email, phone_number, direct, business_activity} = this.state;
+        const {id, name, contact_person_firstname, contact_person_lastname, email, phone_number, direct, business_activity, vm_path, greeting_path} = this.state;
 
         if (name === '') {
 
@@ -569,7 +612,7 @@ class Edit extends Component {
 
             this.setState( { open: false}, () => {
 
-                const data = {id, name, contact_person_firstname, contact_person_lastname, email, phone_number, direct, business_activity};
+                const data = {id, name, contact_person_firstname, contact_person_lastname, email, phone_number, direct, business_activity, vm_path, greeting_path};
 
                 this.props.save(data)
 
@@ -675,6 +718,84 @@ class Edit extends Component {
                             </Label>
                             <Input type="textarea" rows={20} name="business_activity" value={this.state.business_activity} onChange={this.change} />                             
                             
+                        </FormGroup>
+
+                        <FormGroup className="ml-0" row>
+                            <Col md={4} className="p-4 border">
+                               
+                                
+                                <Dropzone 
+                                    accept={{'audio/wav': []}}
+                                    onDrop={(acceptedFiles) => this.drop(acceptedFiles, "vm")}
+                                >
+                                    {({getRootProps, getInputProps}) => (
+                                        <section>
+                                            <div {...getRootProps()}>
+                                                <input {...getInputProps()} />
+                                                <Label className="d-block">VM</Label>
+                                                { this.state.vm_path ?
+
+                                                    <Fragment>
+
+                                                        <Label className="d-block">
+                                                            <audio controls>
+                                                                <source src={ this.state.vm_path } type="audio/wav" />
+                                                            </audio>
+                                                        </Label>
+                                                        <Label
+                                                            className="text-nowrap"
+                                                            style={{ overflow: 'hidden', width: '450px', textOverflow: 'ellipsis' }}
+                                                        >
+                                                            File: { this.state.vm_path }
+                                                        </Label>
+
+                                                    </Fragment>
+
+                                                : '' }
+                                                <p>Click here to select the .wav file</p>
+                                            </div>
+                                        </section>
+                                    )}
+                                </Dropzone>
+                            </Col>
+                            <Col md={2}></Col>
+                            <Col md={4} className="p-4 border">
+                                
+                                
+                                <Dropzone 
+                                    accept={{'audio/wav': []}}
+                                    onDrop={(acceptedFiles) => this.drop(acceptedFiles, "greeting")}
+                                >
+                                    {({getRootProps, getInputProps}) => (
+                                        <section>
+                                            <div {...getRootProps()}>
+                                                <input {...getInputProps()} />
+                                                <Label className="d-block">Greeting</Label>
+                                                { this.state.greeting_path ?
+
+                                                    <Fragment>
+
+                                                        <Label className="d-block">
+                                                            <audio controls>
+                                                                <source src={ this.state.greeting_path } type="audio/wav" />
+                                                            </audio>
+                                                        </Label>
+                                                        <Label
+                                                            className="text-nowrap"
+                                                            style={{ overflow: 'hidden', width: '450px', textOverflow: 'ellipsis' }}
+                                                        >
+                                                            File: { this.state.greeting_path }
+                                                        </Label>
+
+                                                    </Fragment>
+
+                                                    : '' }
+                                                <p>Click here to select the .wav file</p>
+                                            </div>
+                                        </section>
+                                    )}
+                                </Dropzone>
+                            </Col>
                         </FormGroup>
 
                     </ModalBody>

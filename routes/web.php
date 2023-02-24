@@ -17,6 +17,10 @@ Route::get('/company/{id}/script', function() {
     return view('layouts.app');
 });
 
+Route::get('/company/{id}/vm', 'CompanyController@vm');
+
+Route::get('/company/{id}/greeting', 'CompanyController@greeting');
+
 Route::post('/companies/script', 'CompanyController@script');
 
 Auth::routes();
@@ -50,6 +54,8 @@ Route::group(['middleware' => 'auth:web'], function() {
         Route::post('/save-scripts', 'CompanyController@saveScripts');
         Route::post('/greetings', 'CompanyController@greetings');     
         Route::post('/responses', 'CompanyController@responses');     
+
+        Route::post('/upload', 'CompanyController@upload');
 
     });
 

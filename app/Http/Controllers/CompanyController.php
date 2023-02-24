@@ -60,6 +60,9 @@ class CompanyController extends Controller
         $company->email = $request->get('email');
         $company->business_activity = $request->get('business_activity');
 
+        $company->vm_path = $request->get('vm_path');
+        $company->greeting_path = $request->get('greeting_path');
+
         $company->save();
 
         return $this->get();
@@ -142,6 +145,93 @@ class CompanyController extends Controller
 
         return response()->json($data, 200, [], JSON_NUMERIC_CHECK);
 
+
+    }
+
+    public function upload(Request $request) {
+
+        $file = $request->file('file');
+
+        $company_id = $request->get('company_id');
+
+        $section = $request->get('section');
+
+        if ($file) {
+
+            $filename = $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();
+            $tempPath = $file->getRealPath();
+            $fileSize = $file->getSize();
+
+            $location = 'storage/app/audio'; 
+            
+            $file->move($location, $filename);
+
+            $company = Company::find($company_id);
+
+            $path = $location . '/' . $filename;
+
+            if ($section == 'vm') {
+
+                $company->vm_path = $path;
+
+            } else if ($section == 'greeting') {
+
+                $company->greeting_path = $path;
+
+            }
+            
+            return response()->json(['path' => $path]);
+
+        }
+
+    }
+
+    public function vm($did) {
+
+        $phone = $did;
+
+        $company = DB::table('companies')
+                    ->select(
+                            'companies.*',
+                            DB::raw('(SELECT GROUP_CONCAT(CONCAT(firstname, " ", lastname) SEPARATOR ", ") FROM contacts WHERE company_id = companies.id LIMIT 1) AS names')
+                        )
+                    ->whereRaw("(REPLACE(phone_number, ' ', '') = '$phone' OR REPLACE(direct, ' ', '') = '$phone')")
+                    ->first();
+
+        if ($company->vm_path) {
+
+            return env('APP_URL') . '/'. $company->vm_path;
+
+        } else {
+
+            return null;
+
+        }
+
+    }
+
+    public function greeting($did) {
+
+        $phone = $did;
+
+        $company = DB::table('companies')
+                    ->select(
+                            'companies.*',
+                            DB::raw('(SELECT GROUP_CONCAT(CONCAT(firstname, " ", lastname) SEPARATOR ", ") FROM contacts WHERE company_id = companies.id LIMIT 1) AS names')
+                        )
+                    ->whereRaw("(REPLACE(phone_number, ' ', '') = '$phone' OR REPLACE(direct, ' ', '') = '$phone')")
+                    ->first();
+
+        if ($company->greeting_path) {
+
+            return env('APP_URL') . '/'. $company->greeting_path;
+
+        } else {
+
+            return null;
+
+        }
 
     }
     
