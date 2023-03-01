@@ -185,7 +185,7 @@ export default class Scripts extends Component {
 
                         <FormGroup row className="mb-4">
                             <Col md={2} className="font-weight-bold">
-                                Greeting
+                                Script
                             </Col>
                             <Col>
                                 <Input onChange={this.selectGreeting} type="select" className="form-control mb-2">
@@ -200,7 +200,7 @@ export default class Scripts extends Component {
                                 </Input>
                                 <Input type="textarea" 
                                     name="greeting"
-                                    rows={3}
+                                    rows={6}
                                     value={this.state.greeting}
                                     onChange={this.change}
                                     className={ this.state.errorGreeting ? 'is-invalid' : '' }
@@ -213,7 +213,7 @@ export default class Scripts extends Component {
                             </Col>
                         </FormGroup>
 
-                        <FormGroup row className="mb-4">
+                        <FormGroup row className="mb-4 d-none">
                             <Col md={2} className="font-weight-bold">
                                 Response
                             </Col>

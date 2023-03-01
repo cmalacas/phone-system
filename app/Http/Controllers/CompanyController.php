@@ -43,6 +43,7 @@ class CompanyController extends Controller
         $company->direct = $request->get('direct');
         $company->email = $request->get('email');
         $company->business_activity = $request->get('business_activity');
+        $company->company = $request->get('company');
 
         $company->save();
 
@@ -59,6 +60,7 @@ class CompanyController extends Controller
         $company->direct = $request->get('direct');
         $company->email = $request->get('email');
         $company->business_activity = $request->get('business_activity');
+        $company->company = $request->get('company');
 
         $company->vm_path = $request->get('vm_path');
         $company->greeting_path = $request->get('greeting_path');

@@ -201,6 +201,10 @@ export default class Companies extends Component {
                     text: 'Direct Dialing'
                 },
                 {
+                    dataField: 'company',
+                    text: 'Company'
+                },
+                {
                     dataField: 'actions',
                     text: 'Actions'
                 }
@@ -276,6 +280,7 @@ class Add extends Component {
             business_activity: '',
             direct: '',
             open: false,
+            company: 'CO',
             errorName: false,
             errorContactFirstname: false,
             errorContactLastname: false,
@@ -316,7 +321,7 @@ class Add extends Component {
         let errorPhone = false;
         let errorDirect = false;
 
-        const {name, contact_person_firstname, contact_person_lastname, email, phone_number, direct, business_activity} = this.state;
+        const {name, contact_person_firstname, contact_person_lastname, email, phone_number, direct, business_activity, company} = this.state;
 
         if (name === '') {
 
@@ -364,7 +369,7 @@ class Add extends Component {
 
             this.setState( { open: false}, () => {
 
-                const data = {name, contact_person_firstname, contact_person_lastname, email, phone_number, direct, business_activity};
+                const data = {name, contact_person_firstname, contact_person_lastname, email, phone_number, direct, business_activity, company};
 
                 this.props.save(data)
 
@@ -473,6 +478,19 @@ class Add extends Component {
                             <Input type="textarea" rows={20} name="business_activity" value={this.state.business_activity} onChange={this.change} />
                         </FormGroup>
 
+                        <FormGroup row>
+                            <Col md={6}>
+                                <Label>
+                                    Company:
+                                </Label>
+                                <Input className="form-control" name="company" onChange={ this.change } type="select" value={ this.state.company }>
+                                    <option value="">select company</option>
+                                    <option value="CO">CO</option>
+                                    <option value="YCF">YCF</option>
+                                </Input>
+                            </Col>
+                        </FormGroup>
+
                         
 
                     </ModalBody>
@@ -510,6 +528,7 @@ class Edit extends Component {
             vm_path: company.vm_path,
             greeting_path: company.greeting_path,
             direct: company.direct,
+            company: company.company,
             open: false,
             errorName: false,
             errorContactFirstname: false,
@@ -584,7 +603,7 @@ class Edit extends Component {
         let errorPhone = false;
         let errorDirect = false;
 
-        const {id, name, contact_person_firstname, contact_person_lastname, email, phone_number, direct, business_activity, vm_path, greeting_path} = this.state;
+        const {id, name, contact_person_firstname, contact_person_lastname, email, phone_number, direct, business_activity, vm_path, greeting_path, company} = this.state;
 
         if (name === '') {
 
@@ -612,7 +631,7 @@ class Edit extends Component {
 
             this.setState( { open: false}, () => {
 
-                const data = {id, name, contact_person_firstname, contact_person_lastname, email, phone_number, direct, business_activity, vm_path, greeting_path};
+                const data = {id, name, contact_person_firstname, contact_person_lastname, email, phone_number, direct, business_activity, vm_path, greeting_path, company};
 
                 this.props.save(data)
 
@@ -718,6 +737,19 @@ class Edit extends Component {
                             </Label>
                             <Input type="textarea" rows={20} name="business_activity" value={this.state.business_activity} onChange={this.change} />                             
                             
+                        </FormGroup>
+
+                        <FormGroup row>
+                            <Col md={6}>
+                                <Label>
+                                    Company:
+                                </Label>
+                                <Input className="form-control" name="company" onChange={ this.change } type="select" value={ this.state.company }>
+                                    <option value="">select company</option>
+                                    <option value="CO">CO</option>
+                                    <option value="YCF">YCF</option>
+                                </Input>
+                            </Col>
                         </FormGroup>
 
                         <FormGroup className="ml-0" row>
