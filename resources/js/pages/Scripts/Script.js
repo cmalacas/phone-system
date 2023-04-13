@@ -37,11 +37,13 @@ export default class Script extends Component {
 
                 const company = response.company;
 
+                const greeting = company.greeting.replace(/\n/g, '<br />');
+
                 this.setState({
                     name: company.name,
                     email: company.email,
                     business_activity: company.business_activity,
-                    greeting: company.greeting,
+                    greeting: greeting,
                     response: company.response,
                     names: company.names,
                     call_answering: company.call_answering,
@@ -91,7 +93,7 @@ export default class Script extends Component {
                                     Greeting:
                                 </Col>
                                 <Col>
-                                    {this.state.greeting}
+                                    <div dangerouslySetInnerHTML={{ __html: this.state.greeting }} />
                                 </Col>
                             </Row>
 

@@ -123,8 +123,8 @@ export default class Scripts extends Component {
 
         if (!response) {
 
-            valid = false;
-            errorResponse = true;
+            //valid = false;
+            //errorResponse = true;
 
         }
 

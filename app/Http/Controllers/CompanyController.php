@@ -19,7 +19,7 @@ class CompanyController extends Controller
                             'companies.*',
                             DB::raw('(SELECT GROUP_CONCAT(CONCAT(firstname, " ", lastname) SEPARATOR ", ") FROM contacts WHERE company_id = companies.id LIMIT 1) as names')
                         )
-                        ->orderBy('name')
+                        ->orderBy(DB::raw('IF(name = "" OR name IS NULL, 1, 0), name'))
                         ->where('deleted', '=', 0)
                         ->get();
 

@@ -152,9 +152,9 @@ export default class Companies extends Component {
 
         const data = companies.map( c => {
 
-            const phone_number = c.phone_number.replace(/\s/g, '');
+            const phone_number = c.phone_number ? c.phone_number.toString().replace(/\s/g, '') : '';
 
-            const direct = c.direct.replace(/\s/g, '');
+            const direct = c.direct ? c.direct.toString().replace(/\s/g, '') : '';
 
             c._phone_number = <a href={`/company/${phone_number}/script`} target="_blank">{c.phone_number}</a>
 
@@ -278,6 +278,7 @@ class Add extends Component {
             email: '',
             phone_number: '',
             business_activity: '',
+            greeting: '',
             direct: '',
             open: false,
             company: 'CO',
@@ -475,7 +476,15 @@ class Add extends Component {
                             <Label>
                                 Business Activity:
                             </Label>
-                            <Input type="textarea" rows={20} name="business_activity" value={this.state.business_activity} onChange={this.change} />
+                            <Input type="textarea" rows={5} name="business_activity" value={this.state.business_activity} onChange={this.change} />
+                        </FormGroup>
+
+                        <FormGroup>
+                            <Label>
+                                Script:
+                            </Label>
+                            <Input type="textarea" rows={15} name="greeting" value={this.state.greeting} onChange={this.change} />                             
+                            
                         </FormGroup>
 
                         <FormGroup row>
@@ -525,6 +534,7 @@ class Edit extends Component {
             business_activity: company.business_activity,
             email: company.email,
             phone_number: company.phone_number,
+            greeting: company.greeting,
             vm_path: company.vm_path,
             greeting_path: company.greeting_path,
             direct: company.direct,
@@ -735,7 +745,15 @@ class Edit extends Component {
                             <Label>
                                 Business Activity:
                             </Label>
-                            <Input type="textarea" rows={20} name="business_activity" value={this.state.business_activity} onChange={this.change} />                             
+                            <Input type="textarea" rows={5} name="business_activity" value={this.state.business_activity} onChange={this.change} />                             
+                            
+                        </FormGroup>
+
+                        <FormGroup>
+                            <Label>
+                                Script:
+                            </Label>
+                            <Input type="textarea" rows={15} name="greeting" value={this.state.greeting} onChange={this.change} />                             
                             
                         </FormGroup>
 
