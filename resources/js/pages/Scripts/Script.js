@@ -62,7 +62,7 @@ export default class Script extends Component {
 
             <Fragment>
 
-                <div className="container">
+                <div className="container script">
 
                     <Card>
                         <CardHeader>
@@ -70,7 +70,7 @@ export default class Script extends Component {
                         </CardHeader>
                         <CardBody>
 
-                            <Row className="mb-3">
+                            <Row className="pb-3">
                                 <Col md={2}>
                                     Business Name:
                                 </Col>
@@ -79,7 +79,7 @@ export default class Script extends Component {
                                 </Col>
                             </Row>
 
-                            <Row className="mb-3">
+                            <Row className="pb-3">
                                 <Col md={2}>
                                     Email Address:
                                 </Col>
@@ -88,7 +88,7 @@ export default class Script extends Component {
                                 </Col>
                             </Row>
 
-                            <Row className="mb-3">
+                            <Row className="pb-3">
                                 <Col md={2}>
                                     Greeting:
                                 </Col>
@@ -97,7 +97,7 @@ export default class Script extends Component {
                                 </Col>
                             </Row>
 
-                            <Row className="mb-3">
+                            <Row className="pb-3">
                                 <Col md={2}>
                                     Response:
                                 </Col>
@@ -106,7 +106,7 @@ export default class Script extends Component {
                                 </Col>
                             </Row>
 
-                            <Row className="mb-3">
+                            <Row className="pb-3">
                                 <Col md={2}>
                                     Business Activity:
                                 </Col>
@@ -125,7 +125,7 @@ export default class Script extends Component {
                                 </Col>
                             </Row>
 
-                            <Row className="mb-3">
+                            <Row className="pb-3">
                                 <Col md={2}>
                                     Names:
                                 </Col>
@@ -134,7 +134,7 @@ export default class Script extends Component {
                                 </Col>
                             </Row>
 
-                            <Row className="mb-3">
+                            <Row className="pb-3">
                                 <Col md={2}>
                                     
                                 </Col>

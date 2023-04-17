@@ -1,0 +1,23 @@
+
+
+.script {
+
+    .card-header {
+        background-color: #1b9c9b;
+        color: #fff;
+        border-bottom: 1px solid #1b9c9b;
+        font-size: 2rem;
+    }
+
+    .row {
+        display: block;
+
+        font-size: 1.5rem;
+
+        .col-md-2 {
+            font-size: 0.9rem;
+            color: #787878;
+        }
+    }
+
+}
