@@ -99,7 +99,7 @@ export default class Contacts extends Component {
     }
 
     open() {
-        this.setState({open:true});
+        this.setState({open:true}, () => this.getData() );
     }
 
     close() {
@@ -108,7 +108,7 @@ export default class Contacts extends Component {
 
     componentDidMount() {
 
-        this.getData();
+        //this.getData();
 
     }
 

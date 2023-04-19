@@ -21,3 +21,43 @@
     }
 
 }
+
+th {
+
+    &.sortable {
+
+        cursor: pointer;
+
+        .react-bootstrap-table-sort-order {
+
+            position: relative;
+
+            .caret {
+                border-left: 4px solid transparent;
+                border-right: 4px solid transparent;
+                border-top: 4px dashed;
+                border-top: 4px solid;
+                color: #000;
+                display: inline-block;
+                height: 0;
+                margin: 10px 0 10px 5px;
+                vertical-align: middle;
+                width: 0;
+            }
+
+            &.dropup {
+                position: relative;
+
+                .caret {
+                    border-bottom: 4px dashed;
+                    border-top: 0;
+                    color: #000;
+                    content: "";
+                    margin: 10px 0 10px 5px;
+                }
+            }
+
+        }
+
+    }
+}

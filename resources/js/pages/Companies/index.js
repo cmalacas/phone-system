@@ -202,7 +202,13 @@ export default class Companies extends Component {
                 },
                 {
                     dataField: 'company',
-                    text: 'Company'
+                    text: 'Company',
+                    sort: true,
+                    headerStyle: () => {
+
+                        return { cursor: 'pointer' }
+
+                    }
                 },
                 {
                     dataField: 'actions',
@@ -322,7 +328,7 @@ class Add extends Component {
         let errorPhone = false;
         let errorDirect = false;
 
-        const {name, contact_person_firstname, contact_person_lastname, email, phone_number, direct, business_activity, company} = this.state;
+        const {name, contact_person_firstname, contact_person_lastname, email, phone_number, direct, business_activity, company, greeting} = this.state;
 
         if (name === '') {
 
@@ -370,7 +376,7 @@ class Add extends Component {
 
             this.setState( { open: false}, () => {
 
-                const data = {name, contact_person_firstname, contact_person_lastname, email, phone_number, direct, business_activity, company};
+                const data = {name, contact_person_firstname, contact_person_lastname, email, phone_number, direct, business_activity, company, greeting};
 
                 this.props.save(data)
 
@@ -613,7 +619,7 @@ class Edit extends Component {
         let errorPhone = false;
         let errorDirect = false;
 
-        const {id, name, contact_person_firstname, contact_person_lastname, email, phone_number, direct, business_activity, vm_path, greeting_path, company} = this.state;
+        const {id, name, contact_person_firstname, contact_person_lastname, email, phone_number, direct, business_activity, vm_path, greeting_path, company, greeting} = this.state;
 
         if (name === '') {
 
@@ -641,7 +647,7 @@ class Edit extends Component {
 
             this.setState( { open: false}, () => {
 
-                const data = {id, name, contact_person_firstname, contact_person_lastname, email, phone_number, direct, business_activity, vm_path, greeting_path, company};
+                const data = {id, name, contact_person_firstname, contact_person_lastname, email, phone_number, direct, business_activity, vm_path, greeting_path, company, greeting};
 
                 this.props.save(data)
 

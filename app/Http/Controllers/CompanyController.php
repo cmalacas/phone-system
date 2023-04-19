@@ -44,6 +44,7 @@ class CompanyController extends Controller
         $company->email = $request->get('email');
         $company->business_activity = $request->get('business_activity');
         $company->company = $request->get('company');
+        $company->greeting = $request->get('greeting');
 
         $company->save();
 
@@ -64,10 +65,11 @@ class CompanyController extends Controller
 
         $company->vm_path = $request->get('vm_path');
         $company->greeting_path = $request->get('greeting_path');
+        $company->greeting = $request->get('greeting');
 
         $company->save();
 
-        return $this->get();
+        return response()->json(['success' => 1], 200, [], JSON_NUMERIC_CHECK);
 
     }
 
