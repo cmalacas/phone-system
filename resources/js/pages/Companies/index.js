@@ -6,7 +6,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { faPlus, faSave, faBan, faTrash, faEdit, faUsers, faBook } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faSave, faBan, faTrash, faEdit, faUsers, faBook, faBoxArchive } from '@fortawesome/free-solid-svg-icons';
 
 import { formatter, format_datetime, format_date } from '../../components/Functions';
 import Authservice from '../../components/Authservice';
@@ -14,6 +14,8 @@ import Authservice from '../../components/Authservice';
 import ReactTooltip from "react-tooltip";
 
 import paginationFactory from 'react-bootstrap-table2-paginator';
+
+import { Tooltip } from 'react-tooltip'
 
 import Dropzone from 'react-dropzone';
 
@@ -179,6 +181,10 @@ export default class Companies extends Component {
 
                 
                 <Button color="danger" data-tip="Delete" onClick={() => this.delete(c) }><FontAwesomeIcon icon={faTrash} /> </Button>
+
+                <Logs 
+                    company={ c }
+                />
 
 
             </Fragment>
@@ -858,6 +864,127 @@ class Edit extends Component {
                     <ModalFooter>
                         <Button onClick={this.close} color="danger"><FontAwesomeIcon icon={faBan} /> Cancel</Button>
                         <Button onClick={this.save} color="success"><FontAwesomeIcon icon={faSave} /> Save</Button>
+                    </ModalFooter>
+                </Modal>
+            </Fragment>
+
+        )
+
+    }
+
+}
+
+class Logs extends Component {
+
+    constructor(props) {
+
+        super( props );
+
+        this.state = {
+
+            open: false,
+            data: []
+
+        }
+
+        this.open = this.open.bind(this);
+        this.close = this.close.bind(this);
+
+    }
+
+    open() {
+
+        const company = this.props.company;
+
+        const company_id = company.id;
+
+        this.setState({ open: true }, () => {
+
+            Authservice.post(`/companies/logs`, {company_id})
+            .then( response => {
+
+                if (response.logs) {
+
+                    this.setState({ data: response.logs });
+
+                }
+
+            })
+
+        });
+
+    }
+
+    close() {
+
+        this.setState({ open: false });
+
+    }
+
+    render() {
+
+        const data = this.state.data;
+
+        const columns = [
+                        {
+                            dataField: 'description',
+                            text: 'Description'
+                        },
+                        {
+                            dataField: 'old_value',
+                            text: 'Old Value'
+                        },
+                        {
+                            dataField: 'new_value',
+                            text: 'New Value'
+                        },
+                        {
+                            dataField: 'created_at',
+                            text: 'Date',
+                            classes: 'text-nowrap',
+                            formatter: (cell) => {
+
+                                return format_datetime(cell);
+
+                            }
+                        }
+                    ];
+
+        return (
+
+            <Fragment>
+                <Button 
+                    data-tip="Logs" 
+                    className="ml-1" 
+                    color="primary"
+                    onClick={ this.open }
+                >
+                    <FontAwesomeIcon 
+                        icon={faBoxArchive} 
+                    />
+                </Button>
+                <Modal 
+                    isOpen={ this.state.open } 
+                    toggle={ this.close }
+                    className="mw-100 w-75"
+                >
+                    <ModalHeader>
+                        Audit Trail Logs
+                    </ModalHeader>
+                    <ModalBody>
+                        <BootstrapTable 
+                            keyField="id"
+                            data={ data }
+                            columns={ columns }
+                        />
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button 
+                            color="light"
+                            onClick={ this.close }
+                        >
+                            <FontAwesomeIcon icon={faBan} /> Close
+                        </Button>
                     </ModalFooter>
                 </Modal>
             </Fragment>

@@ -8,6 +8,8 @@ use App\Company;
 use App\Greeting;
 use App\Response;
 
+use App\Events\UpdateEvent;
+
 use DB;
 
 class CompanyController extends Controller
@@ -56,6 +58,8 @@ class CompanyController extends Controller
 
         $company = Company::find($request->get('id'));
 
+        $old = $company->toArray();
+
         $company->name = $request->get('name');
         $company->phone_number = $request->get('phone_number');
         $company->direct = $request->get('direct');
@@ -69,6 +73,8 @@ class CompanyController extends Controller
 
         $company->save();
 
+        event( new UpdateEvent( $old, $company ) );        
+
         return response()->json(['success' => 1], 200, [], JSON_NUMERIC_CHECK);
 
     }
@@ -77,9 +83,13 @@ class CompanyController extends Controller
 
         $company = Company::find($request->get('id'));
 
+        $old = $company->toArray();
+
         $company->deleted = 1;
 
         $company->save();
+
+        event( new UpdateEvent( $old, $company ) );        
 
         return $this->get();
 
@@ -89,12 +99,16 @@ class CompanyController extends Controller
 
         $company = Company::find($request->get('id'));
 
+        $old = $company->toArray();
+
         $company->greeting = $request->get('greeting');
         $company->response = $request->get('response');
         $company->call_answering = $request->get('call_answering');
         $company->voicemail = $request->get('voicemail');
 
         $company->save();
+
+        event( new UpdateEvent( $old, $company ) );        
 
         return response()->json(['success' => 1], 200, [], JSON_NUMERIC_CHECK);
 
@@ -236,6 +250,16 @@ class CompanyController extends Controller
             return null;
 
         }
+
+    }
+
+    public function logs(Request $request) {
+
+        $company = Company::find($request->get('company_id'));
+
+        $logs = $company->logs;
+
+        return response()->json(['logs' => $logs], 200, [], JSON_NUMERIC_CHECK);
 
     }
     

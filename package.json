@@ -33,7 +33,7 @@
         "react-dropzone": "^14.2.3",
         "react-router-dom": "^6.4.5",
         "react-summernote": "^2.0.2",
-        "react-tooltip": "^4.2.20",
+        "react-tooltip": "^4.5.1",
         "reactstrap": "^9.1.5",
         "vue-template-compiler": "^2.7.14",
         "webpack": "^5.75.0"

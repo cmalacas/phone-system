@@ -57,6 +57,8 @@ Route::group(['middleware' => 'auth:web'], function() {
 
         Route::post('/upload', 'CompanyController@upload');
 
+        Route::post('/logs', 'CompanyController@logs');
+
     });
 
     Route::prefix('/contacts')->group(function() {
