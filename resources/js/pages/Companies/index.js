@@ -15,7 +15,13 @@ import ReactTooltip from "react-tooltip";
 
 import paginationFactory from 'react-bootstrap-table2-paginator';
 
-import { Tooltip } from 'react-tooltip'
+import ReactSummernote from 'react-summernote';
+import 'react-summernote/dist/react-summernote.css'; // import styles
+import 'react-summernote/lang/summernote-ru-RU';
+
+import 'bootstrap/js/dist/modal';
+import 'bootstrap/js/dist/dropdown';
+import 'bootstrap/js/dist/tooltip';
 
 import Dropzone from 'react-dropzone';
 
@@ -495,7 +501,26 @@ class Add extends Component {
                             <Label>
                                 Script:
                             </Label>
-                            <Input type="textarea" rows={15} name="greeting" value={this.state.greeting} onChange={this.change} />                             
+                            {/* <Input type="textarea" rows={15} name="greeting" value={this.state.greeting} onChange={this.change} />  */ }
+
+                            <ReactSummernote
+                                value={ this.state.greeting }
+                                options={{
+                                lang: 'ru-RU',
+                                height: 350,
+                                dialogsInBody: true,
+                                toolbar: [
+                                    ['style', ['style']],
+                                    ['font', ['bold', 'underline', 'clear']],
+                                    ['fontname', ['fontname']],
+                                    ['para', ['ul', 'ol', 'paragraph']],
+                                    ['table', ['table']],
+                                    ['insert', ['link', 'picture', 'video']],
+                                    ['view', ['fullscreen', 'codeview']]
+                                ]
+                                }}
+                                onChange={this.onChange}
+                            />                      
                             
                         </FormGroup>
 
@@ -566,6 +591,12 @@ class Edit extends Component {
         this.change = this.change.bind(this);
        
         this.drop = this.drop.bind(this);
+
+        this.updateGreeting = this.updateGreeting.bind(this);
+    }
+
+    updateGreeting(content) {
+        this.setState( { greeting: content } );
     }
 
     drop(files, section) {
@@ -684,6 +715,8 @@ class Edit extends Component {
 
     render() {
 
+        const greeting = this.state.greeting.replace(/\n/g, "<br />");
+
         return (
 
             <Fragment>
@@ -757,7 +790,7 @@ class Edit extends Component {
                             <Label>
                                 Business Activity:
                             </Label>
-                            <Input type="textarea" rows={5} name="business_activity" value={this.state.business_activity} onChange={this.change} />                             
+                            <Input type="textarea" rows={5} name="business_activity" value={this.state.business_activity} onChange={this.change} />
                             
                         </FormGroup>
 
@@ -765,7 +798,29 @@ class Edit extends Component {
                             <Label>
                                 Script:
                             </Label>
-                            <Input type="textarea" rows={15} name="greeting" value={this.state.greeting} onChange={this.change} />                             
+                            
+                            {/* <Input type="textarea" rows={15} name="greeting" value={this.state.greeting} onChange={this.change} /> */}
+
+                            <ReactSummernote
+                                onInit={() => { const editArea = document.querySelector(".note-editable"); editArea.innerHTML = greeting; }} 
+                                shouldComponentUpdate={() => {}}
+                                value={ greeting }
+                                options={{
+                                lang: 'ru-RU',
+                                height: 350,
+                                dialogsInBody: true,
+                                toolbar: [
+                                        ['style', ['style']],
+                                        ['font', ['bold', 'underline', 'clear']],
+                                        ['fontname', ['fontname']],
+                                        ['para', ['ul', 'ol', 'paragraph']],
+                                        ['table', ['table']],
+                                        ['insert', ['link', 'picture', 'video']],
+                                        ['view', ['fullscreen', 'codeview']]
+                                    ]
+                                }}
+                                onChange={this.updateGreeting}
+                            />                      
                             
                         </FormGroup>
 
