@@ -17,7 +17,7 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 
 import ReactSummernote from 'react-summernote';
 import 'react-summernote/dist/react-summernote.css'; // import styles
-import 'react-summernote/lang/summernote-ru-RU';
+import 'react-summernote/lang/summernote-uk-UA';
 
 import 'bootstrap/js/dist/modal';
 import 'bootstrap/js/dist/dropdown';
@@ -809,6 +809,7 @@ class Edit extends Component {
                                 lang: 'ru-RU',
                                 height: 350,
                                 dialogsInBody: true,
+                                fontNames: ['Arial', 'Arial Black'],
                                 toolbar: [
                                         ['style', ['style']],
                                         ['font', ['bold', 'underline', 'clear']],
@@ -817,7 +818,12 @@ class Edit extends Component {
                                         ['table', ['table']],
                                         ['insert', ['link', 'picture', 'video']],
                                         ['view', ['fullscreen', 'codeview']]
-                                    ]
+                                    ],
+                                fontNames: [
+                                        'Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
+                                        'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande',
+                                        'Sacramento'
+                                            ]
                                 }}
                                 onChange={this.updateGreeting}
                             />                      
