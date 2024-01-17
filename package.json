@@ -28,6 +28,8 @@
         "@fortawesome/fontawesome-svg-core": "^6.2.1",
         "@fortawesome/free-solid-svg-icons": "^6.2.1",
         "@fortawesome/react-fontawesome": "^0.2.0",
+        "react-bootstrap": "^2.9.2",
+        "react-bootstrap-modal": "^4.2.0",
         "react-bootstrap-table-next": "^4.0.3",
         "react-bootstrap-table2-paginator": "^2.1.2",
         "react-dropzone": "^14.2.3",

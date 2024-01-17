@@ -494,7 +494,11 @@ class Add extends Component {
                             <Label>
                                 Business Activity:
                             </Label>
-                            <Input type="textarea" rows={5} name="business_activity" value={this.state.business_activity} onChange={this.change} />
+                            <Input 
+                                type="textarea" 
+                                rows={5} name="business_activity" 
+                                value={this.state.business_activity} 
+                                onChange={this.change} />
                         </FormGroup>
 
                         <FormGroup>
@@ -505,19 +509,26 @@ class Add extends Component {
 
                             <ReactSummernote
                                 value={ this.state.greeting }
+                                onInit={() => { 
+                                    const editArea = document.querySelector(".note-editable"); 
+                                    editArea.innerHTML = this.state.greeting; 
+                                    $('.dropdown-toggle').dropdown()
+                                }} 
                                 options={{
-                                lang: 'ru-RU',
-                                height: 350,
-                                dialogsInBody: true,
-                                toolbar: [
-                                    ['style', ['style']],
-                                    ['font', ['bold', 'underline', 'clear']],
-                                    ['fontname', ['fontname']],
-                                    ['para', ['ul', 'ol', 'paragraph']],
-                                    ['table', ['table']],
-                                    ['insert', ['link', 'picture', 'video']],
-                                    ['view', ['fullscreen', 'codeview']]
-                                ]
+                                    lang: 'ru-RU',
+                                    height: 350,
+                                    dialogsInBody: true,
+                                    toolbar: [
+                                        ['style', ['style', 'bold', 'italic', 'underline', 'clear']],
+                                        ['font', ['bold', 'underline', 'clear']],
+                                        ['fontsize', ['fontsize']],
+                                        ['color', ['color']],
+                                        ['fontname', ['fontname']],
+                                        ['para', ['ul', 'ol', 'paragraph']],
+                                        ['table', ['table']],
+                                        ['insert', ['link', 'picture', 'video']],
+                                        ['view', ['fullscreen', 'codeview']]
+                                    ]
                                 }}
                                 onChange={this.onChange}
                             />                      
@@ -568,7 +579,7 @@ class Edit extends Component {
             name: company.name,
             contact_person_firstname: '',
             contact_person_lastname: '',
-            business_activity: company.business_activity,
+            business_activity: company.business_activity ?? '',
             email: company.email,
             phone_number: company.phone_number,
             greeting: company.greeting,
@@ -712,6 +723,16 @@ class Edit extends Component {
 
     }
 
+    onInit = (note) => {
+        note.reset()
+        const regex = /(\<\w*)((\s\/\>)|(.*\<\/\w*\>))/i
+        if (this.props.value.match(regex) !== null) {
+          note.replace(this.props.value)
+        } else {
+          note.insertText(this.props.value)
+        }
+    }
+
 
     render() {
 
@@ -802,28 +823,28 @@ class Edit extends Component {
                             {/* <Input type="textarea" rows={15} name="greeting" value={this.state.greeting} onChange={this.change} /> */}
 
                             <ReactSummernote
-                                onInit={() => { const editArea = document.querySelector(".note-editable"); editArea.innerHTML = greeting; }} 
-                                shouldComponentUpdate={() => {}}
+                                onInit={() => { 
+                                        const editArea = document.querySelector(".note-editable"); 
+                                        editArea.innerHTML = greeting; 
+                                        $('.dropdown-toggle').dropdown()
+                                    }} 
                                 value={ greeting }
                                 options={{
-                                lang: 'ru-RU',
-                                height: 350,
-                                dialogsInBody: true,
-                                fontNames: ['Arial', 'Arial Black'],
-                                toolbar: [
-                                        ['style', ['style']],
-                                        ['font', ['bold', 'underline', 'clear']],
-                                        ['fontname', ['fontname']],
-                                        ['para', ['ul', 'ol', 'paragraph']],
-                                        ['table', ['table']],
-                                        ['insert', ['link', 'picture', 'video']],
-                                        ['view', ['fullscreen', 'codeview']]
-                                    ],
-                                fontNames: [
-                                        'Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
-                                        'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande',
-                                        'Sacramento'
-                                            ]
+                                    lang: 'ru-RU',
+                                    height: 350,
+                                    dialogsInBody: true,
+                                    toolbar: [
+                                            ['style', ['style', 'bold', 'italic', 'underline', 'clear']],
+                                            ['font', ['bold', 'underline', 'clear']],
+                                            ['fontsize', ['fontsize']],
+                                            ['color', ['color']],
+                                            ['fontname', ['fontname']],
+                                            ['para', ['ul', 'ol', 'paragraph']],
+                                            ['table', ['table']],
+                                            ['insert', ['link', 'picture', 'video']],
+                                            ['view', ['fullscreen', 'codeview']]
+                                        ],
+                                
                                 }}
                                 onChange={this.updateGreeting}
                             />                      

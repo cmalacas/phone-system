@@ -14,6 +14,13 @@ import Authservice from '../../components/Authservice';
 import ReactTooltip from "react-tooltip";
 import Greetings from '../Greetings';
 
+import ReactSummernote from 'react-summernote';
+import 'react-summernote/dist/react-summernote.css'; // import styles
+import 'react-summernote/lang/summernote-uk-UA';
+
+import 'bootstrap/js/dist/modal';
+import 'bootstrap/js/dist/dropdown';
+import 'bootstrap/js/dist/tooltip';
 
 export default class Scripts extends Component {
 
@@ -189,21 +196,46 @@ export default class Scripts extends Component {
                             </Col>
                             <Col>
                                 <Input onChange={this.selectGreeting} type="select" className="form-control mb-2">
-                                    <option value="">select</option>
+                                    <option key={0} value="">select</option>
                                     {
                                         greetings.map( g => {
 
-                                            return <option value={g.id}>{g.name}</option>
+                                            return <option key={g.id} value={g.id}>{g.name}</option>
 
                                         })
                                     }
                                 </Input>
-                                <Input type="textarea" 
+                                {/* <Input type="textarea" 
                                     name="greeting"
                                     rows={6}
                                     value={this.state.greeting}
                                     onChange={this.change}
                                     className={ this.state.errorGreeting ? 'is-invalid' : '' }
+                                /> */}
+                                <ReactSummernote
+                                    value={ this.state.greeting }
+                                    onInit={() => { 
+                                        const editArea = document.querySelector(".note-editable"); 
+                                        editArea.innerHTML = this.state.greeting; 
+                                        $('.dropdown-toggle').dropdown()
+                                    }} 
+                                    options={{
+                                        lang: 'ru-RU',
+                                        height: 350,
+                                        dialogsInBody: true,
+                                        toolbar: [
+                                            ['style', ['style', 'bold', 'italic', 'underline', 'clear']],
+                                            ['font', ['bold', 'underline', 'clear']],
+                                            ['fontsize', ['fontsize']],
+                                            ['color', ['color']],
+                                            ['fontname', ['fontname']],
+                                            ['para', ['ul', 'ol', 'paragraph']],
+                                            ['table', ['table']],
+                                            ['insert', ['link', 'picture', 'video']],
+                                            ['view', ['fullscreen', 'codeview']]
+                                        ]
+                                    }}
+                                    onChange={this.onChange}
                                 />
                                 { this.state.errorGreeting ?
                                     <span className="invalid-feedback" role="alert">
@@ -223,7 +255,7 @@ export default class Scripts extends Component {
                                     {
                                         responses.map( r => {
 
-                                            return <option value={r.id}>{r.name}</option>
+                                            return <option key={r.id} value={r.id}>{r.name}</option>
 
                                         })
                                     }
