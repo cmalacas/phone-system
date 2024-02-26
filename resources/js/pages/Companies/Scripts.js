@@ -205,14 +205,14 @@ export default class Scripts extends Component {
                                         })
                                     }
                                 </Input>
-                                {/* <Input type="textarea" 
+                                <Input type="textarea" 
                                     name="greeting"
-                                    rows={6}
+                                    rows={20}
                                     value={this.state.greeting}
                                     onChange={this.change}
                                     className={ this.state.errorGreeting ? 'is-invalid' : '' }
-                                /> */}
-                                <ReactSummernote
+                                /> 
+                                {/* <ReactSummernote
                                     value={ this.state.greeting }
                                     onInit={() => { 
                                         const editArea = document.querySelector(".note-editable"); 
@@ -236,7 +236,7 @@ export default class Scripts extends Component {
                                         ]
                                     }}
                                     onChange={this.onChange}
-                                />
+                                /> */}
                                 { this.state.errorGreeting ?
                                     <span className="invalid-feedback" role="alert">
                                         <strong>This is required</strong>

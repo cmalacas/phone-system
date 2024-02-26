@@ -37,7 +37,7 @@ export default class Script extends Component {
 
                 const company = response.company;
 
-                const greeting = company.greeting.replace(/\n/g, '<br />');
+                const greeting = company.greeting.toString().replace(/\n/g, '<br />');
 
                 this.setState({
                     name: company.name,

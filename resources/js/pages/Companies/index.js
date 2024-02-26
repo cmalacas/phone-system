@@ -505,9 +505,9 @@ class Add extends Component {
                             <Label>
                                 Script:
                             </Label>
-                            {/* <Input type="textarea" rows={15} name="greeting" value={this.state.greeting} onChange={this.change} />  */ }
+                            <Input type="textarea" rows={15} name="greeting" value={this.state.greeting} onChange={this.change} />  
 
-                            <ReactSummernote
+                            {/* <ReactSummernote
                                 value={ this.state.greeting }
                                 onInit={() => { 
                                     const editArea = document.querySelector(".note-editable"); 
@@ -531,7 +531,7 @@ class Add extends Component {
                                     ]
                                 }}
                                 onChange={this.onChange}
-                            />                      
+                            /> */}                     
                             
                         </FormGroup>
 
@@ -820,9 +820,9 @@ class Edit extends Component {
                                 Script:
                             </Label>
                             
-                            {/* <Input type="textarea" rows={15} name="greeting" value={this.state.greeting} onChange={this.change} /> */}
+                            <Input type="textarea" rows={15} name="greeting" value={this.state.greeting} onChange={this.change} /> 
 
-                            <ReactSummernote
+                            {/* <ReactSummernote
                                 onInit={() => { 
                                         const editArea = document.querySelector(".note-editable"); 
                                         editArea.innerHTML = greeting; 
@@ -847,7 +847,7 @@ class Edit extends Component {
                                 
                                 }}
                                 onChange={this.updateGreeting}
-                            />                      
+                            />  */}                    
                             
                         </FormGroup>
 
