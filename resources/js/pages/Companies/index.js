@@ -736,7 +736,7 @@ class Edit extends Component {
 
     render() {
 
-        const greeting = this.state.greeting.replace(/\n/g, "<br />");
+        const greeting = this.state.greeting.toString().replace(/\n/g, "<br />");
 
         return (
 
