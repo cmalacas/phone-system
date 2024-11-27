@@ -146,7 +146,7 @@ export default class Companies extends Component {
 
         const companies = this.state.companies.filter( c => {
 
-            const str = `${c.name}${c.phone_number}${c.direct}`.toString().toUpperCase();
+            const str = `${c.name ? c.name : ''}${c.phone_number ? c.phone_number : ''}${c.direct ? c.direct : ''}`.toString().toUpperCase();
 
             const keywords = this.state.keywords.toString().toUpperCase();
 
@@ -582,7 +582,7 @@ class Edit extends Component {
             business_activity: company.business_activity ?? '',
             email: company.email,
             phone_number: company.phone_number,
-            greeting: company.greeting,
+            greeting: company.greeting ?? '',
             vm_path: company.vm_path,
             greeting_path: company.greeting_path,
             direct: company.direct,

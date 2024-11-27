@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/company/{id}/script', function() {
+Route::get('/company/{id}/script', function () {
     return view('layouts.app');
 });
 
@@ -25,14 +25,14 @@ Route::post('/companies/script', 'CompanyController@script');
 
 Auth::routes();
 
-Route::group(['middleware' => 'auth:web'], function() {
+Route::group(['middleware' => 'auth:web'], function () {
 
     Route::get('/', function () {
         return view('layouts.app');
-    }); 
+    });
 
 
-    Route::prefix('/dashboard')->group(function() {
+    Route::prefix('/dashboard')->group(function () {
 
         Route::get('/', function () {
             return view('layouts.app');
@@ -45,15 +45,15 @@ Route::group(['middleware' => 'auth:web'], function() {
 
     Route::post('/get-user-data', 'UserController@get');
 
-    Route::prefix('/companies')->group(function() {
+    Route::prefix('/companies')->group(function () {
 
         Route::post('/save', 'CompanyController@save');
-        Route::post('/get', 'CompanyController@get');   
+        Route::post('/get', 'CompanyController@get');
         Route::post('/update', 'CompanyController@update');
-        Route::post('/delete', 'CompanyController@delete');     
+        Route::post('/delete', 'CompanyController@delete');
         Route::post('/save-scripts', 'CompanyController@saveScripts');
-        Route::post('/greetings', 'CompanyController@greetings');     
-        Route::post('/responses', 'CompanyController@responses');     
+        Route::post('/greetings', 'CompanyController@greetings');
+        Route::post('/responses', 'CompanyController@responses');
 
         Route::post('/upload', 'CompanyController@upload');
 
@@ -61,18 +61,18 @@ Route::group(['middleware' => 'auth:web'], function() {
 
     });
 
-    Route::prefix('/contacts')->group(function() {
+    Route::prefix('/contacts')->group(function () {
 
         Route::post('/{id}/get', 'ContactController@get');
-        Route::post('/save', 'ContactController@save');   
+        Route::post('/save', 'ContactController@save');
         Route::post('/update', 'ContactController@update');
-        Route::post('/delete', 'ContactController@delete');     
-        
+        Route::post('/delete', 'ContactController@delete');
+
 
     });
 
 
-    Route::prefix('/greetings')->group(function() {
+    Route::prefix('/greetings')->group(function () {
 
         Route::get('/', function () {
             return view('layouts.app');
@@ -81,11 +81,11 @@ Route::group(['middleware' => 'auth:web'], function() {
         Route::post('/get', 'GreetingController@get');
         Route::post('/save', 'GreetingController@save');
         Route::post('/update', 'GreetingController@update');
-        Route::post('/delete', 'GreetingController@delete');     
-        
+        Route::post('/delete', 'GreetingController@delete');
+
     });
 
-    Route::prefix('/responses')->group(function() {
+    Route::prefix('/responses')->group(function () {
 
         Route::get('/', function () {
             return view('layouts.app');

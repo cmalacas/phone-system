@@ -42,7 +42,8 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function login(Request $request) {
+    public function login(Request $request)
+    {
 
         $email = $request->get('email');
 
@@ -60,5 +61,11 @@ class LoginController extends Controller
 
         }
 
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->to('/login');
     }
 }
